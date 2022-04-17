@@ -11,16 +11,12 @@ function App() {
     useEffect(() => {
         fetch("http://127.0.0.1:8000/movierater/movies", {
             method: 'GET', headers: {
-                'Content-Type': 'application/json', 'Authorization': 'Token '
+                'Content-Type': 'application/json', 'Authorization': 'Token fb4da56aa72ef3190594b82d365287a53774f59f'
             }
         }).then(resp => resp.json())
             .then(resp => setMovies(resp))
             .catch(error => console.log(error))
     }, [])
-
-    const movieClicked = movie => {
-        setSelectedMovie(movie);
-    }
 
     return (<div className="App">
         <header className="App-header">
@@ -30,11 +26,11 @@ function App() {
         <div className="layout">
             <div>
                 Movie List
-                <MovieList movies={movies} movieClicked={movieClicked}/>
+                <MovieList movies={movies} movieClicked={setSelectedMovie}/>
             </div>
             <div>
                 Movie Details
-                <MovieDetails movie={selectedMovie}/>
+                <MovieDetails movie={selectedMovie} updateMovie={setSelectedMovie}/>
             </div>
 
         </div>
