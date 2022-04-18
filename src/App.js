@@ -50,7 +50,7 @@ function App() {
             <div>
                 Movie Details
                 <MovieDetails movie={selectedMovie} updateMovie={loadMovie} editedMovie={editedMovie}/>
-                {editedMovie ? <MovieForm movie={editedMovie}/> : null}
+                {editedMovie ? <MovieForm movie={editedMovie} updatedMovie={loadMovie}/> : null}
 
             </div>
 
