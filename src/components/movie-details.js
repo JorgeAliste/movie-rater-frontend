@@ -5,6 +5,7 @@ import {solid} from '@fortawesome/fontawesome-svg-core/import.macro'
 function MovieDetails(props) {
 
     const movie = props.movie
+    const editedMovie = props.editedMovie
 
     const [highlighted, setHighlighted] = useState(0);
 
@@ -15,12 +16,10 @@ function MovieDetails(props) {
     const rateOnClick = rate => evt => {
         fetch(`http://127.0.0.1:8000/movierater/movies/${movie.id}/rate_movie/`, {
             method: 'POST', headers: {
-                'Content-Type': 'application/json', 'Authorization': 'Token '
+                'Content-Type': 'application/json', 'Authorization': 'Token fb4da56aa72ef3190594b82d365287a53774f59f'
             }, body: JSON.stringify({score: rate})
         }).then(() => getDetails())
             .catch(error => console.log(error))
-
-
     }
 
     const getDetails = () => {
@@ -58,7 +57,7 @@ function MovieDetails(props) {
                         }
                     </div>
                 </Fragment>
-                : <h1> Select a movie to see the details</h1>
+                : editedMovie ? null : <h1> Select a movie to see the details</h1>
             }
         </div>
     )
