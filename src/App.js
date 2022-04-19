@@ -47,6 +47,13 @@ function App() {
         setMovies(newMovies)
     }
 
+    const removeClicked = movie => {
+        const newMovies = movies.filter(mov => {
+            return mov.id !== movie.id;
+        })
+        setMovies(newMovies)
+    }
+
     return (<div className="App">
         <header className="App-header">
             The Movie Rater APP!
@@ -55,13 +62,19 @@ function App() {
         <div className="layout">
             <div>
                 Movie List
-                <MovieList movies={movies} movieClicked={loadMovie} editClicked={editClicked}/>
+                <MovieList
+                    movies={movies}
+                    movieClicked={loadMovie}
+                    editClicked={editClicked}
+                    removeClicked={removeClicked}
+                />
                 <button onClick={newMovie}>New Movie</button>
             </div>
             <div>
                 Movie Details
                 <MovieDetails movie={selectedMovie} updateMovie={loadMovie} editedMovie={editedMovie}/>
-                {editedMovie ? <MovieForm movie={editedMovie} updatedMovie={loadMovie} movieCreated={movieCreated}/> : null}
+                {editedMovie ?
+                    <MovieForm movie={editedMovie} updatedMovie={loadMovie} movieCreated={movieCreated}/> : null}
 
             </div>
 
