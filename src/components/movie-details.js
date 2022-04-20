@@ -1,6 +1,7 @@
 import React, {Fragment, useState} from 'react';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {solid} from '@fortawesome/fontawesome-svg-core/import.macro'
+import {useCookies} from "react-cookie";
 
 function MovieDetails(props) {
 
@@ -8,6 +9,7 @@ function MovieDetails(props) {
     const editedMovie = props.editedMovie
 
     const [highlighted, setHighlighted] = useState(0);
+    const [token] = useCookies(['mr-token'])
 
     const highlightRate = high => evt => {
         setHighlighted(high)
@@ -16,7 +18,7 @@ function MovieDetails(props) {
     const rateOnClick = rate => evt => {
         fetch(`http://127.0.0.1:8000/movierater/movies/${movie.id}/rate_movie/`, {
             method: 'POST', headers: {
-                'Content-Type': 'application/json', 'Authorization': 'Token fb4da56aa72ef3190594b82d365287a53774f59f'
+                'Content-Type': 'application/json', 'Authorization': `Token ${token['mr-token']}`
             }, body: JSON.stringify({score: rate})
         }).then(() => getDetails())
             .catch(error => console.log(error))
@@ -25,7 +27,7 @@ function MovieDetails(props) {
     const getDetails = () => {
         fetch(`http://127.0.0.1:8000/movierater/movies/${movie.id}/`, {
             method: 'GET', headers: {
-                'Content-Type': 'application/json', 'Authorization': 'Token fb4da56aa72ef3190594b82d365287a53774f59f'
+                'Content-Type': 'application/json', 'Authorization': `Token ${token['mr-token']}`
             }
         }).then(resp => resp.json())
             .then(resp => props.updateMovie(resp))
