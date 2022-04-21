@@ -6,32 +6,47 @@ function Auth() {
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [isLoginView, setIsLoginView] = useState(true);
 
     const [token, setToken] = useCookies(['mr-token'])
 
     useEffect(() => {
-            if (token['mr-token']) window.location.href = '/movies'
-        },
-        [token])
+        if (token['mr-token']) window.location.href = '/movies'
+    }, [token])
 
     const loginClicked = () => {
         API.loginUser({username, password})
             .then(resp => setToken('mr-token', resp.token))
             .catch(error => console.log(error))
     }
+    const registerClicked = () => {
+        API.registerUser({username, password})
+            .then(resp => loginClicked())
+            .catch(error => console.log(error))
+    }
 
     return (
         <div>
+            {isLoginView ? <h1>Login</h1> : <h1>Register</h1>}
+
             {/*<form>*/}
-                <label htmlFor="username">username</label><br/>
-                <input id="username" type="text" placeholder="username" value={username}
-                       onChange={evt => setUsername(evt.target.value)}/><br/>
-                <label htmlFor="password">Password</label><br/>
-                <input id="password" type="password" placeholder="Password"
-                       value={password}
-                       onChange={evt => setPassword(evt.target.value)} autoComplete="on"/><br/>
-                <button onClick={loginClicked}>Login</button>
+            <label htmlFor="username">username</label><br/>
+            <input id="username" type="text" placeholder="username" value={username}
+                   onChange={evt => setUsername(evt.target.value)}/><br/>
+            <label htmlFor="password">Password</label><br/>
+            <input id="password" type="password" placeholder="Password"
+                   value={password}
+                   onChange={evt => setPassword(evt.target.value)} autoComplete="on"/><br/>
+            {isLoginView ? <button onClick={loginClicked}>Login</button> :
+                <button onClick={registerClicked}>Register</button>}
+
+
             {/*</form>*/}
+            {isLoginView ? <p onClick={() => setIsLoginView(false)}>You do not have an account? Register here!</p> :
+                <p onClick={() => setIsLoginView(true)}>You already have an account? Login here!</p>
+            }
+
+
         </div>
     )
 }
