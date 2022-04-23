@@ -16,7 +16,7 @@ function MovieDetails(props) {
     }
 
     const rateOnClick = rate => evt => {
-        fetch(`http://127.0.0.1:8000/movierater/movies/${movie.id}/rate_movie/`, {
+        fetch(`${process.env.REACT_APP_API_URL}/movierater/movies/${movie.id}/rate_movie/`, {
             method: 'POST', headers: {
                 'Content-Type': 'application/json', 'Authorization': `Token ${token['mr-token']}`
             }, body: JSON.stringify({score: rate})
@@ -25,7 +25,7 @@ function MovieDetails(props) {
     }
 
     const getDetails = () => {
-        fetch(`http://127.0.0.1:8000/movierater/movies/${movie.id}/`, {
+        fetch(`${process.env.REACT_APP_API_URL}/movierater/movies/${movie.id}/`, {
             method: 'GET', headers: {
                 'Content-Type': 'application/json', 'Authorization': `Token ${token['mr-token']}`
             }
@@ -59,7 +59,7 @@ function MovieDetails(props) {
                         }
                     </div>
                 </Fragment>
-                : editedMovie ? null : <h1> Select a movie to see the details</h1>
+                : editedMovie ? null : <h2> Select a movie to see the details</h2>
             }
         </div>
     )

@@ -1,7 +1,15 @@
 export class API {
 
+    static getMovies(token) {
+        return fetch(`${process.env.REACT_APP_API_URL}/movierater/movies`, {
+            method: 'GET', headers: {
+                'Content-Type': 'application/json', 'Authorization': `Token ${token}`
+            }
+        }).then(resp => resp.json())
+    }
+
     static loginUser(body) {
-        return fetch(`http://127.0.0.1:8000/auth/`, {
+        return fetch(`${process.env.REACT_APP_API_URL}/auth/`, {
                 method: 'POST', headers: {
                     'Content-Type': 'application/json'
                 }, body: JSON.stringify(body)
@@ -10,7 +18,7 @@ export class API {
     }
 
     static updateMovie(movie_id, body, token) {
-        return fetch(`http://127.0.0.1:8000/movierater/movies/${movie_id}/`, {
+        return fetch(`${process.env.REACT_APP_API_URL}/movierater/movies/${movie_id}/`, {
                 method: 'PUT', headers: {
                     'Content-Type': 'application/json', 'Authorization': `Token ${token}`
                 }, body: JSON.stringify(body)
@@ -19,7 +27,7 @@ export class API {
     }
 
     static createMovie(body, token) {
-        return fetch(`http://127.0.0.1:8000/movierater/movies/`, {
+        return fetch(`${process.env.REACT_APP_API_URL}/movierater/movies/`, {
                 method: 'POST', headers: {
                     'Content-Type': 'application/json', 'Authorization': `Token ${token}`
                 }, body: JSON.stringify(body)
@@ -28,7 +36,7 @@ export class API {
     }
 
     static deleteMovie(movie_id, token) {
-        return fetch(`http://127.0.0.1:8000/movierater/movies/${movie_id}/`, {
+        return fetch(`${process.env.REACT_APP_API_URL}/movierater/movies/${movie_id}/`, {
                 method: 'DELETE', headers: {
                     'Content-Type': 'application/json', 'Authorization': `Token ${token}`
                 }
@@ -37,7 +45,7 @@ export class API {
     }
 
     static registerUser(body) {
-        return fetch(`http://127.0.0.1:8000/movierater/users/`, {
+        return fetch(`${process.env.REACT_APP_API_URL}/movierater/users/`, {
                 method: 'POST', headers: {
                     'Content-Type': 'application/json'
                 }, body: JSON.stringify(body)

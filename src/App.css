@@ -16,36 +16,86 @@
 
 }
 
-.layout{
+.layout {
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-gap: 20px;
 }
 
-.orange-star{
+.orange-star {
     color: orange;
 }
 
-.purple-star{
+.purple-star {
     color: purple;
 }
 
-.rate-container{
+.rate-container {
     margin-top: 20px;
     border-top: 2px solid purple;
 }
 
-.rate-container .fa-star{
+.rate-container .fa-star {
     cursor: pointer;
     font-size: 1.8rem;
 }
 
-.movie-item{
+.movie-item {
     display: grid;
     grid-template-columns: 1fr auto auto;
 }
 
-.movie-item svg{
+.movie-item svg {
     font-size: 1.2rem;
     margin: 16px 5px;
+}
+
+.login-container {
+    width: 50%;
+    margin: 0 25%;
+}
+
+input, textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    font-size: 0.8rem;
+}
+
+button {
+    color: #444;
+    background-color: #f3f3f3;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-weight: bold;
+    font-size: 0.8rem;
+    outline: none;
+    cursor: pointer;
+}
+
+button:disabled {
+    color: #f3f3f3;
+    background-color: #444;
+    cursor: not-allowed;
+}
+
+.fa-trash {
+    color: crimson;
+}
+
+h1 {
+    color: orange;
+}
+
+h1 .fa-film {
+    color: white;
+    transform: rotate(35deg);
+}
+
+.fa-right-from-bracket {
+    position: absolute;
+    top: 20px;
+    right: 50px;
+    cursor: pointer;
+    font-size: 1.5rem;
 }
